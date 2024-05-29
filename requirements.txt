@@ -1,0 +1,2 @@
+coinbase-advanced-py==1.4.1
+dacite==1.8.1
