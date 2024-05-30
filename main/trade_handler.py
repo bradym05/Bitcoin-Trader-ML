@@ -5,7 +5,7 @@ import time
 from typing import Optional, List, Dict
 from dacite import from_dict
 from main.private import portfolio_uuid
-from main.services import SaveService, RestClientService, PaperClientService, WebsocketService, OrderService
+from main.services import SaveService, RestClientService, PaperClientService, WebsocketService, CustomTickService, OrderService
 from main.types import *
 
 # SETTINGS
@@ -16,10 +16,16 @@ SAVE_NAME = "MAIN"
 # Declare trade handler class
 class TradeHandler():
     # Initialize handler
-    def __init__(self, save_version:str="0", save_path:Optional[str]=None, paper:bool=True):
+    def __init__(
+        self, 
+        save_version:str="0", 
+        save_path:Optional[str]=None,
+        paper:bool=True,
+        custom_tick:bool=False
+        ):
         # Initialize services
         self.rest_client = PaperClientService.get_instance() if paper == True else RestClientService.get_instance()
-        self.websocket = WebsocketService.get_instance()
+        self.websocket = CustomTickService.get_instance() if custom_tick == True else WebsocketService.get_instance()
         self.order_service = OrderService.get_instance(paper=paper)
         self.save_service = SaveService.get_instance(version=save_version, path=save_path)
         self.uuid = portfolio_uuid
@@ -51,16 +57,6 @@ class TradeHandler():
             data_class=PortfolioBreakdown,
             data=self.rest_client.get_portfolio_breakdown(self.uuid),
         )
-    # Get ticker data
-    def get_ticks(self) -> dict[str, list[TickerEvent]]:
-        # Deep copy dictionary
-        tick_dict = {}
-        for product, ticks in self.websocket.ticks.items():
-            tick_dict[product] = []
-            for event in ticks:
-                event_copy = event.__dict__.copy()
-                tick_dict[product].append(from_dict(TickerEvent, event_copy))
-        return tick_dict
     # Callback on order finished
     def order_finished(self, order:Order):
         # Remove referenced thread
