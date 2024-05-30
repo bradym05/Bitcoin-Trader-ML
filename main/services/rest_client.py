@@ -7,5 +7,7 @@ from coinbase.rest import RESTClient
 class RestClientService(RESTClient, SingletonBase):
     # Initialize object
     def __init__(self, key_file:str=key_file_path):
+        if key_file == None:
+            key_file = key_file_path
         # Initialize from superclass
         super().__init__(key_file=key_file)

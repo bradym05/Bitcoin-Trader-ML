@@ -23,7 +23,6 @@ class SaveService(SingletonBase):
             # Get existing save
             with open(self._path, 'rb') as f:
                 self._data = pickle.load(f)
-                print(self._data)
                 self._loaded = True
         except FileNotFoundError:
             pass

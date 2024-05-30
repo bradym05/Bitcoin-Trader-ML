@@ -5,6 +5,7 @@ from main.types.orders import OrderSide
 from main.types.orders import OrderStatus
 from main.types.orders import OrderType
 from main.types.orders import Order
+from main.types.orders import LimitLimitGtc
 from main.types.events import OrderEvent
 from main.types.events import TickerEvent
 from main.types.events import WebsocketEvent
@@ -18,6 +19,7 @@ __all__ = [
     "OrderStatus",
     "OrderType",
     "Order",
+    "LimitLimitGtc",
     "OrderEvent",
     "TickerEvent",
     "WebsocketEvent",

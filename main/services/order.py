@@ -1,17 +1,22 @@
 # Dependencies
 import uuid
 from main.types import *
-from main.services import SingletonBase, RestClientService, WebsocketService
+from main.services import SingletonBase, RestClientService, PaperClientService, WebsocketService
 from decimal import Decimal, ROUND_DOWN
 
 # Declare order service
 class OrderService(SingletonBase):
     # Initialize object
-    def __init__(self, config:CurrencyPairConfig=CurrencyPairConfig(pair=CurrencyPair.BTC_USDC, precision=8), preview:bool=True) -> None:
-        self.rest_client = RestClientService.get_instance()
+    def __init__(self, config:CurrencyPairConfig=CurrencyPairConfig(pair=CurrencyPair.BTC_USDC, precision=8), paper:bool=True) -> None:
+        self.rest_client = PaperClientService.get_instance() if paper == True else RestClientService.get_instance()
         self.websocket = WebsocketService.get_instance()
         self.config = config
-        self.preview = preview
+        self.paper = paper
+    # Get most recent ticker price
+    def get_price(self) -> str:
+        ticks = self.websocket.get_ticks(self.config.pair.value)
+        if len(ticks) > 0:
+            return ticks[-1].price
     # Get unique id for orders
     def get_client_order_id(self) -> str:
         return str(uuid.uuid4())
@@ -34,30 +39,17 @@ class OrderService(SingletonBase):
             order_id = self.get_client_order_id()
             size = self.adjust_precision(size, self.config.precision)
             price = self.adjust_precision(price)
-            # Check mode
-            if self.preview == True:
-                # Get response preview
-                response = self.rest_client.preview_limit_order_gtc_buy(
-                    product_id=self.config.pair.value + "C",
-                    base_size=size,
-                    limit_price=price,
-                )
-                # Write success variable manually
-                if response:
-                    response['success'] = True
-            else:
-                # Get server response
-                response = self.rest_client.limit_order_gtc_buy(
-                    client_order_id=order_id,
-                    product_id=self.config.pair.value + "C",
-                    base_size=size,
-                    limit_price=price,
-                )
+            # Get server response
+            response = self.rest_client.limit_order_gtc_buy(
+                client_order_id=order_id,
+                product_id=self.config.pair.value + "C",
+                base_size=size,
+                limit_price=price,
+            )
+            print(response)
             # Validate response
             if 'success' in response and response['success'] == True:
-                # Update order id if not previewing
-                if self.preview == False:
-                    order_id = response['order_id']
+                order_id = response['order_id']
                 return order_id
             else:
                 return None
@@ -79,30 +71,16 @@ class OrderService(SingletonBase):
             order_id = self.get_client_order_id()
             size = self.adjust_precision(size, self.config.precision)
             price = self.adjust_precision(price)
-            # Check mode
-            if self.preview == True:
-                # Get response preview
-                response = self.rest_client.preview_limit_order_gtc_sell(
-                    product_id=self.config.pair.value + "C",
-                    base_size=size,
-                    limit_price=price,
-                )
-                # Write success variable manually
-                if response:
-                    response['success'] = True
-            else:
-                # Get server response
-                response = self.rest_client.limit_order_gtc_sell(
-                    client_order_id=order_id,
-                    product_id=self.config.pair.value + "C",
-                    base_size=size,
-                    limit_price=price,
-                )
+            # Get server response
+            response = self.rest_client.limit_order_gtc_sell(
+                client_order_id=order_id,
+                product_id=self.config.pair.value + "C",
+                base_size=size,
+                limit_price=price,
+            )
             # Validate response
             if 'success' in response and response['success'] == True:
-                # Update order id if not previewing
-                if self.preview == False:
-                    order_id = response['order_id']
+                order_id = response['order_id']
                 return order_id
             else:
                 return None

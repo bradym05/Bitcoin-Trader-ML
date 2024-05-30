@@ -5,7 +5,7 @@ import time
 from typing import Optional, List, Dict
 from dacite import from_dict
 from main.private import portfolio_uuid
-from main.services import SaveService, RestClientService, WebsocketService, OrderService
+from main.services import SaveService, RestClientService, PaperClientService, WebsocketService, OrderService
 from main.types import *
 
 # SETTINGS
@@ -16,11 +16,11 @@ SAVE_NAME = "MAIN"
 # Declare trade handler class
 class TradeHandler():
     # Initialize handler
-    def __init__(self, save_version:str="0", save_path:Optional[str]=None):
+    def __init__(self, save_version:str="0", save_path:Optional[str]=None, paper:bool=True):
         # Initialize services
-        self.rest_client = RestClientService.get_instance()
+        self.rest_client = PaperClientService.get_instance() if paper == True else RestClientService.get_instance()
         self.websocket = WebsocketService.get_instance()
-        self.order_service = OrderService.get_instance(preview=False)
+        self.order_service = OrderService.get_instance(paper=paper)
         self.save_service = SaveService.get_instance(version=save_version, path=save_path)
         self.uuid = portfolio_uuid
         self._watch = {}
@@ -63,10 +63,8 @@ class TradeHandler():
         return tick_dict
     # Callback on order finished
     def order_finished(self, order:Order):
-        # Stop watch thread
-        watch_thread:threading.Thread = self._watch.pop(order.order_id, None)
-        if watch_thread != None and watch_thread.is_alive():
-            watch_thread._delete()
+        # Remove referenced thread
+        self._watch.pop(order.order_id, None)
         # Initialize variables
         order_side = OrderSide(order.side)
         # Check order side
