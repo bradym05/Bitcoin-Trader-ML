@@ -1,6 +1,5 @@
 # Dependencies
 import pandas as pd
-import pandas_ta as pdta
 import datetime
 
 from machine_learning.types import FeatureMap
@@ -53,8 +52,9 @@ class HistoricalFeed:
                 self.df.pop(column)
         # Sort from oldest to newest date
         self.df.sort_index(inplace=True, ascending=True)
+        self.df = self.df.astype(dtype='float32')
         # Initialize variables
-        self.max_index = len(self.df)
+        self.max_index = len(self.df) - 1
         self.index = 24 # Start at 24 hours
     # Step forward and get current data
     def step(self) -> pd.DataFrame:
@@ -63,22 +63,22 @@ class HistoricalFeed:
         # Get row from 24 hours back
         yesterday_row = self.df.loc[[self.df.index[self.index - 24]]]
         # Calculate values
-        price_float = float(row['close_price'].item())
-        price_change_24_h = (price_float - float(yesterday_row['close_price'].item()))/price_float
-        volume_24_h = float(row['btc_vol'].item()) + float(yesterday_row['btc_vol'].item())
-        high_24_h = max(float(row['high'].item()), float(yesterday_row['high'].item()))
-        low_24_h = min(float(row['low'].item()), float(yesterday_row['low'].item()))
+        price_float = row['close_price'].item()
+        price_change_24_h = (price_float - yesterday_row['close_price'].item())/price_float
+        volume_24_h = row['btc_vol'].item() + yesterday_row['btc_vol'].item()
+        high_24_h = max(row['high'].item(), yesterday_row['high'].item())
+        low_24_h = min(row['low'].item(), yesterday_row['low'].item())
         # Create ticker event dict
         ticker_event = {
             'type':"ticker",
             'product_id':"BTC-USD",
-            'price':row["close_price"].item(),
+            'price':str(row["close_price"].item()),
             'price_percent_chg_24_h':str(price_change_24_h),
             'volume_24_h':str(volume_24_h),
             'high_24_h':str(high_24_h),
             'low_24_h':str(low_24_h),
-            'best_bid':row['high'].item(),
-            'best_ask':row['low'].item(),
+            'best_bid':str(row['high'].item()),
+            'best_ask':str(row['low'].item()),
             'low_52_w':"",
             'high_52_w':"",
             'best_bid_quantity':"",
@@ -89,5 +89,5 @@ class HistoricalFeed:
         # Check index bounds
         if self.index > self.max_index:
             self.index = 0
-        # Return obtained data row
-        return ticker_event
+        # Return ticker event and obtained data row
+        return ticker_event, row

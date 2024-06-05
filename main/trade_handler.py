@@ -25,7 +25,7 @@ class TradeHandler():
         ):
         # Initialize services
         self.rest_client = PaperClientService.get_instance() if paper == True else RestClientService.get_instance()
-        self.websocket = CustomTickService.get_instance() if custom_tick == True else WebsocketService.get_instance()
+        self.websocket = CustomTickService.get_instance(no_wait=True) if custom_tick == True else WebsocketService.get_instance()
         self.order_service = OrderService.get_instance(paper=paper)
         self.save_service = SaveService.get_instance(version=save_version, path=save_path)
         self.uuid = portfolio_uuid

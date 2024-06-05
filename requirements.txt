@@ -1,2 +1,7 @@
 coinbase-advanced-py==1.4.1
 dacite==1.8.1
+neuralforecast==0.1.0
+pandas_ta==0.3.14b0
+accelerate==0.30.1
+datasetsforecast==0.0.8
+hierarchicalforecast==0.4.1

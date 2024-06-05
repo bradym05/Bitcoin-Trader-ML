@@ -26,6 +26,9 @@ class WebsocketService(SingletonBase):
     def run(self):
         ws_thread = threading.Thread(target=self._connect, daemon=True)
         ws_thread.start()
+    # Set optional callback to receive websocket events
+    def set_event_callback(self, callback:callable):
+        self._event_callback = callback
     # Connect to websocket
     def _connect(self):
         print("Websocket Connecting")
@@ -57,12 +60,19 @@ class WebsocketService(SingletonBase):
         data = from_dict(WebsocketMessage, data)
         # Iterate over ticker data
         for ticker in data.events[0].tickers or []:
+            # Get product
             product = ticker.product_id
+            # Check if product is referenced
             if not product in self.ticks:
                 self.ticks[product] = []
+            # Update ticks
             self.ticks[product].append(ticker)
+            # Maintain length
             if len(self.ticks[product]) > self.ticker_length:
                 self.ticks[product].pop(0)
+            # Check for event callback
+            if getattr(self, "_event_callback", None):
+                self._event_callback(ticker.__dict__)
     # Get ticks from product id
     def get_ticks(self, product:str) -> List[TickerEvent]:
         if product in self.ticks:
