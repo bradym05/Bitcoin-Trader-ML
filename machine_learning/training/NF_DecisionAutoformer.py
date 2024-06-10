@@ -13,6 +13,7 @@ import numpy as np
 DATA_PATH = "machine_learning\data\BTCUSDT_DECISION_15M.pkl"
 BTC_FACTOR = 71000
 
+'''
 # Get preprocessed data
 with open(DATA_PATH, 'rb') as f:
     # Load base dataset
@@ -74,10 +75,15 @@ occurences = {}
 for key, all_vals in translations.items():
     occurences[key] = {}
     for val in all_vals:
-        truncated = str(math.fabs(val))[:3]
-        truncated = float(truncated)
-        truncated = math.copysign(truncated, val)
-        truncated = str(truncated)
+        truncated = str(math.fabs(val))
+        trim_point = 0
+        for num_char in truncated:
+            trim_point += 1
+            if num_char != '.' and num_char != '0':
+                trim_point += 1
+                break
+        truncated = truncated[:trim_point]
+        truncated = str(math.copysign(float(truncated), val))
         if not truncated in occurences[key]:
             occurences[key][truncated] = 0
         occurences[key][truncated] += 1
@@ -97,4 +103,3 @@ for key, occ_dict in occurences.items():
 
 print(occurences)
 print(direct_translations)
-'''

@@ -113,7 +113,7 @@ class TradeHandler():
             finally:
                 time.sleep(ORDER_UPDATE_INTERVAL)
     # Place buy order
-    def buy(self, size:float, price:float) -> None:
+    def buy(self, size:float, price:float) -> str:
         # Get order id
         order_id = self.order_service.buy(size=str(size), price=str(price))
         # Check status
@@ -124,8 +124,12 @@ class TradeHandler():
             self._watch[order_id] = watch_thread
             # Start thread
             watch_thread.start()
+            # Return order id
+            return order_id
+        # Return empty string
+        return ''
     # Sell purchased order
-    def sell(self, bought_order_id:Optional[str]=None, price:Optional[float]=None) -> None:
+    def sell(self, bought_order_id:Optional[str]=None, price:Optional[float]=None) -> str:
         # Initialize variables
         bought_order = None
         # Check if given a order id
@@ -169,5 +173,9 @@ class TradeHandler():
             self._watch[sell_order_id] = watch_thread
             # Start thread
             watch_thread.start()
+            # Return sold order id
+            return sell_order_id
         else:
             self.inventory.append(bought_order)
+        # Return empty string
+        return ''
