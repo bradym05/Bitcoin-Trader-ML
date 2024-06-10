@@ -57,6 +57,7 @@ To get started with this project, you need to install the required packages. Fol
        'sma5', 'sma6', 'sma7', 'sma8', 'sma9']
     ```
     *Example Dataframe*
+    ```bash
                     ds  unique_id  open_price      high       low         y   btc_vol  usdc_vol  ...      sma2      sma3      sma4      sma5      sma6      sma7      sma8      sma9
     0 2017-08-19 00:00:00          0    0.143153  0.145590  0.142314  0.145074  0.001439  5.925526  ...  0.149302  0.148726  0.148141  0.146973  0.145702  0.144943  0.144299  0.143965
     1 2017-08-19 00:05:00          0    0.143313  0.145609  0.142485  0.145030  0.001403  5.780747  ...  0.149254  0.148677  0.148043  0.146867  0.145639  0.144889  0.144271  0.143939
@@ -64,6 +65,7 @@ To get started with this project, you need to install the required packages. Fol
     3 2017-08-19 00:15:00          0    0.143633  0.145646  0.142826  0.144943  0.001331  5.491189  ...  0.149158  0.148579  0.147849  0.146655  0.145512  0.144782  0.144216  0.143888
     4 2017-08-19 00:20:00          0    0.143793  0.145664  0.142997  0.144900  0.001294  5.346409  ...  0.149110  0.148531  0.147751  0.146549  0.145449  0.144728  0.144188  0.143862
     [648853 rows x 38 columns]
+    ```
 
     2. **Train your autoformer**:
     >Optional: Edit and use machine_learning\training\NF_Autoformer.py according to your dataset
@@ -90,6 +92,7 @@ To get started with this project, you need to install the required packages. Fol
        'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12']
     ```
     *Example Dataframe*
+    ```bash
     y                     ds  open_price      high       low  close_price   btc_vol  usdc_vol  ...        p4       p5        p6        p7        p8       p9       p10       p11       p12
     0  1 2017-08-19 00:00:00    0.143153  0.145590  0.142314     0.145074  0.001439  5.925526  ...  0.144832  0.14463  0.144239  0.143678  0.143814  0.14406  0.144468  0.144901  0.142082
     1  1 2017-08-19 00:15:00    0.143633  0.145646  0.142826     0.144943  0.001331  5.491189  ...  0.144832  0.14463  0.144239  0.143678  0.143814  0.14406  0.144468  0.144901  0.142082
@@ -97,6 +100,7 @@ To get started with this project, you need to install the required packages. Fol
     3  1 2017-08-19 00:45:00    0.144594  0.145757  0.143851     0.144683  0.001113  4.622513  ...  0.144832  0.14463  0.144239  0.143678  0.143814  0.14406  0.144468  0.144901  0.142082
     4  1 2017-08-19 01:00:00    0.145074  0.145812  0.144364     0.144552  0.001005  4.188176  ...  0.144832  0.14463  0.144239  0.143678  0.143814  0.14406  0.144468  0.144901  0.142082
     [216285 rows x 51 columns]
+    ```
 
     2. **Train your autoformer**:
     >Optional: Edit and use machine_learning\training\NF_DecisionAutoformer.py according to your dataset
