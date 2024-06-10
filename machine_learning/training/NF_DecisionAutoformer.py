@@ -13,7 +13,6 @@ import numpy as np
 DATA_PATH = "machine_learning\data\BTCUSDT_DECISION_15M.pkl"
 BTC_FACTOR = 71000
 
-'''
 # Get preprocessed data
 with open(DATA_PATH, 'rb') as f:
     # Load base dataset
@@ -23,6 +22,7 @@ with open(DATA_PATH, 'rb') as f:
 
 print(preprocessed.head())
 print(preprocessed.tail())
+print(preprocessed.columns)
 print(preprocessed.shape)
 
 horizon = 1
@@ -103,3 +103,4 @@ for key, occ_dict in occurences.items():
 
 print(occurences)
 print(direct_translations)
+'''

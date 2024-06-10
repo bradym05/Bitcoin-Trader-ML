@@ -1,0 +1,10 @@
+cff-version: 0.0.1
+message: "If you use Bitcoin-Trader-ML in your research, please cite it using these metadata."
+authors:
+  - family-names: Maki
+    given-names: Brady
+title: Bitcoin-Trader-ML
+version: v0.0.10
+date-released: 2024-6-10
+url: https://github.com/bradym05/Bitcoin-Trader-ML
+license: MIT
