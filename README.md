@@ -30,10 +30,12 @@ To get started with this project, you need to install the required packages. Fol
     ```
 
 2. **Get your coinbase API key**:
+
     Create your API key and download the JSON file (coinbase_cloud_api_key.json)
     https://portal.cdp.coinbase.com/access/api
 
 3. **Setup private folder**:
+
     In Bitcoin-Trader-ML\main
     Create folder "private"
     Copy your coinbase API file to Bitcoin-Trader-ML\main\private\coinbase_cloud_api_key.json
@@ -44,6 +46,7 @@ To get started with this project, you need to install the required packages. Fol
     ```
 
 4. **Train Price Prediction Autoformer**:
+
     *Using neuralforecast,*
 
     1. **Preprocess your dataset**:
@@ -73,14 +76,20 @@ To get started with this project, you need to install the required packages. Fol
     Save your trained autoformer to: machine_learning\training\saved\Autoformer_30M\
 
 5. **Train Decision Autoformer**:
+
     *Using neuralforecast,*
 
     1. **Preprocess your dataset**:
+
     Decisions are mapped as follows:
+
+    ## Decisions Chart
+
     | Value    | Decision |
     | -1       | Sell     |
     |  0       | Hold     |
     |  1       | Buy      |
+
     *Columns*
     >y is the decision value
     >p1-p12 are predictions from the price prediction autoformer
@@ -107,10 +116,11 @@ To get started with this project, you need to install the required packages. Fol
     >Optional: Edit and use machine_learning\training\NF_DecisionAutoformer.py according to your dataset
 
     Save your trained autoformer to: machine_learning\training\saved\DecisionAutoformer\
-    
+
     >Note: You must convert your autoformer's raw outputs into int decision values
 
 6. **Begin Auto Trading**:
+
     Example:
     ```python
     from main import AutoTrader
