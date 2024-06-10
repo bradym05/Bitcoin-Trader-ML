@@ -50,6 +50,7 @@ To get started with this project, you need to install the required packages. Fol
     *Using neuralforecast,*
 
     1. **Preprocess your dataset**:
+    
     *Columns*
     >y is the price
     ```python
