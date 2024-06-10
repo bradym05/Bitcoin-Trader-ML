@@ -24,7 +24,7 @@ print(preprocessed.head())
 print(preprocessed.tail())
 print(preprocessed.shape)
 
-horizon = 12
+horizon = 8
 
 #'''
 nf = NeuralForecast(
@@ -43,14 +43,14 @@ nf = NeuralForecast(
             max_steps=1000,
             val_check_steps=10)
         ],
-    freq='5T'
+    freq='30T'
     )
 #'''
 #nf = NeuralForecast.load(path="machine_learning\\training\\saved\\Autoformer_V4")
 # Fit to dataset
 nf.fit(df=preprocessed, sort_df=False, val_size=0)
 # Save
-nf.save(path='machine_learning\\training\\saved\\Autoformer_V8\\',
+nf.save(path='machine_learning\\training\\saved\\Autoformer_30M\\',
         model_index=None, 
         overwrite=True,
         save_dataset=True)
