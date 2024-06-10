@@ -69,6 +69,7 @@ To get started with this project, you need to install the required packages. Fol
 
     2. **Train your autoformer**:
     >Optional: Edit and use machine_learning\training\NF_Autoformer.py according to your dataset
+    
     Save your trained autoformer to: machine_learning\training\saved\Autoformer_30M\
 
 5. **Train Decision Autoformer**:
@@ -104,7 +105,9 @@ To get started with this project, you need to install the required packages. Fol
 
     2. **Train your autoformer**:
     >Optional: Edit and use machine_learning\training\NF_DecisionAutoformer.py according to your dataset
+
     Save your trained autoformer to: machine_learning\training\saved\DecisionAutoformer\
+    
     >Note: You must convert your autoformer's raw outputs into int decision values
 
 6. **Begin Auto Trading**:
