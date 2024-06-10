@@ -87,6 +87,7 @@ To get started with this project, you need to install the required packages. Fol
         ## Decisions Chart
 
         | Value    | Decision |
+        |----------|----------|
         | -1       | Sell     |
         |  0       | Hold     |
         |  1       | Buy      |
