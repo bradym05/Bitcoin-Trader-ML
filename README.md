@@ -160,7 +160,3 @@ If you have used Bitcoin Trader ML, please cite with the following reference:
 ## 📜 License
 
 Bitcoin Trader ML is licensed under the MIT License. See the [LICENSE](https://github.com/bradym05/Bitcoin-Trader-ML/blob/main/LICENSE) file for more information.
-
-## Acknowledgements
-
-- Bitcoin Trader ML is meant to be used for research purposes only. The author, Brady Maki, is not responsible for any misuse of the library.
