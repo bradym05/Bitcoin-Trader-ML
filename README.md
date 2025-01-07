@@ -139,18 +139,6 @@ To get started with this project, you need to install the required packages. Fol
         print(auto_trader.predict.decisions)
     ```
 
-## 🎓 Citations
-If you have used Bitcoin Trader ML, please cite with the following reference:
-```text
-  @misc{bitcoin-trader-ml,
-    author = {Brady Maki},
-    title = {Bitcoin-Trader-ML},
-    year = {2024},
-    url = {https://github.com/bradym05/Bitcoin-Trader-ML},
-    note = {Automated 24/7 bitcoin trader for Coinbase using Transformer Neural Networks}
-  }
-```
-
 ## Authors
 
 | Author      | Contact Info         |
