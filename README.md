@@ -132,11 +132,10 @@ To get started with this project, you need to install the required packages. Fol
     # Create AutoTrader object, set paper to true to simulate trading
     auto_trader = AutoTrader(paper=True)
 
-    # Run indefinitely
-    while True:
-        time.sleep(1)
-        # Print decision history
-        print(auto_trader.predict.decisions)
+    # Wait for auto trader to make decisions
+    time.sleep(5)
+    # Print decision history
+    print(auto_trader.predict.decisions)
     ```
 
 ## Authors
