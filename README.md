@@ -1,7 +1,5 @@
 # Bitcoin-Trader-ML
  
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 Bitcoin Trader ML is a automatic *crypto trading bot* for *Coinbase* using Transformer Neural Networks.
 
 Train one Autoformer for crypto price predictions, and one for trade decisions (-1: Sell, 0: Hold, 1: Buy).
@@ -142,8 +140,5 @@ To get started with this project, you need to install the required packages. Fol
 
 | Author      | Contact Info         |
 |-------------|----------------------|
-| Brady Maki  | [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/brady-m-899456230/)    |
+| Brady Maki  | [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/brady-maki/)    |
 
-## 📜 License
-
-Bitcoin Trader ML is licensed under the MIT License. See the [LICENSE](https://github.com/bradym05/Bitcoin-Trader-ML/blob/main/LICENSE) file for more information.
