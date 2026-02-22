@@ -136,6 +136,9 @@ To get started with this project, you need to install the required packages. Fol
     print(auto_trader.predict.decisions)
     ```
 
+## Original Repo
+https://github.com/bradym05/Crypto-Price-AI
+
 ## Authors
 
 | Author      | Contact Info         |
