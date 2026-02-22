@@ -139,9 +139,3 @@ To get started with this project, you need to install the required packages. Fol
 ## Original Repo
 https://github.com/bradym05/Crypto-Price-AI
 
-## Authors
-
-| Author      | Contact Info         |
-|-------------|----------------------|
-| Brady Maki  | [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/brady-maki/)    |
-
